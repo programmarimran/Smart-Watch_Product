@@ -13,6 +13,13 @@ for (const ring of roundbtn){
 
         // event.target.classList.remove("border-blue-500")
         event.target.classList.add("border-red-500")
+
+        //*********** */
+        const colorWatch=event.target.getAttribute("id");
+        const colorName=colorWatch.replace("-color","")
+        document.getElementById("product-image").src=`./images/${colorName}.png`
+        //********* */
+        
     })
  
 }
@@ -46,7 +53,12 @@ document.getElementById("quantity-minus")
     
 })
 //***************************************** */
-document.getElementById("add-to-cart")
-.addEventListener("click",function(event){
-    
-})
+// document.getElementById("add-to-cart")
+// .addEventListener("click",function(event){
+//     document.getElementById("checkout-container").classList.remove("hidden");
+//     const cardCount =convertedElemetInnerText("cart-count")
+
+//     const quantity=convertedElemetInnerText("quantity")
+//     const quuu=document.getElementById("quantity").innerText=Math.max(0,quantity-1);
+//     document.getElementById("cart-count").innerText=cardCount+quuu
+// })
