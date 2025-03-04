@@ -87,19 +87,24 @@ document.getElementById("checkout-container")
 .addEventListener("click",function(){
     document.getElementById("cart-modal").classList.remove("hidden");
 
-    let container=document.getElementById("cart-items")
-    let div=document.createElement("div")
-    div.innerHTML=`
-     <tr class="text-left border-b">
-                <td class="py-2 px-4">${arryOfObject.item}</td>
-                <td class="py-2 px-4">${arryOfObject.color}</td>
-                <td class="py-2 px-4">Size</td>
-                <td class="py-2 px-4">Quantity</td>
-                <td class="py-2 px-4">Price</td>
-              </tr>
-    `
-    container.appendChild(div)
+for(const object of arryOfObject){
 
+
+    let container=document.getElementById("cart-items")
+    let tr=document.createElement("tr")
+    tr.classList.add("text-left","border-b");
+    tr.innerHTML=`
+     
+                <td class="py-2 px-4">${object.item}</td>
+                <td class="py-2 px-4">${object.color}</td>
+                <td class="py-2 px-4">${object.size}</td>
+                <td class="py-2 px-4">${object.quantity}</td>
+                <td class="py-2 px-4">${object.price*object.quantity}</td>
+               
+    `
+    console.log(tr.innerHTML)
+    container.appendChild(tr)
+}
 
 
 
