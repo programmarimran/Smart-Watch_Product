@@ -69,29 +69,36 @@ document.getElementById("add-to-cart")
 .addEventListener("click",function(event){
     document.getElementById("checkout-container").classList.remove("hidden");
     let cardCount =convertedElemetInnerText("cart-count")
-    const quantity=convertedElemetInnerText("quantity")
-    console.log(cardCount ,quantity)
+    const quantity=convertedElemetInnerText("quantity") 
     document.getElementById("cart-count").innerText=cardCount+quantity;
-
 const productName =document.getElementById("product-name").innerText;
-const productColor=document.querySelectorAll(".ring-button")
-console.log(productColor)
-
-
-const object={item:productName,color:color,size:size,quantity:quantity,price:price}
+// const productColor=document.querySelectorAll(".ring-button")
+let object={item:productName,color:color,size:size,quantity:quantity,price:price}
 
 
 arryOfObject.push(object)
-
+console.log(arryOfObject)
 
 })
+
 
 //****************************** */
 document.getElementById("checkout-container")
 .addEventListener("click",function(){
     document.getElementById("cart-modal").classList.remove("hidden");
 
-
+    let container=document.getElementById("cart-items")
+    let div=document.createElement("div")
+    div.innerHTML=`
+     <tr class="text-left border-b">
+                <td class="py-2 px-4">${arryOfObject.item}</td>
+                <td class="py-2 px-4">${arryOfObject.color}</td>
+                <td class="py-2 px-4">Size</td>
+                <td class="py-2 px-4">Quantity</td>
+                <td class="py-2 px-4">Price</td>
+              </tr>
+    `
+    container.appendChild(div)
 
 
 
