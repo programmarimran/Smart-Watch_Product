@@ -1,7 +1,8 @@
 let arryOfObject =[]
 let color ='';
 let size='';
-let price=''
+let price='';
+let quantityStorage =''
 const roundbtn= document.querySelectorAll(".ring-button")
 for (const ring of roundbtn){
 
@@ -53,20 +54,23 @@ for(const sizeButton of sizeButtons){
 document.getElementById("quantity-plus")
 .addEventListener("click",function(event){
    const quantity=convertedElemetInnerText("quantity")
-   console.log(quantity)
+   
     document.getElementById("quantity").innerText=quantity+1;
+    quantityStorage=quantity;
 })
 //************************************************* */
 document.getElementById("quantity-minus")
 .addEventListener("click",function(event){
    const quantity=convertedElemetInnerText("quantity")
    document.getElementById("quantity").innerText=Math.max(0,quantity-1);
-    
+  
 })
 //***************************************** */
+console.log(quantityStorage)
 
 document.getElementById("add-to-cart")
 .addEventListener("click",function(event){
+    
     document.getElementById("checkout-container").classList.remove("hidden");
     let cardCount =convertedElemetInnerText("cart-count")
     const quantity=convertedElemetInnerText("quantity") 
@@ -77,7 +81,7 @@ let object={item:productName,color:color,size:size,quantity:quantity,price:price
 
 
 arryOfObject.push(object)
-console.log(arryOfObject)
+
 
 })
 
@@ -95,15 +99,37 @@ for(const object of arryOfObject){
     tr.classList.add("text-left","border-b");
     tr.innerHTML=`
      
-                <td class="py-2 px-4">${object.item}</td>
+                <td colspan="6" class="py-2 px-4">
+                <div class="flex items-center space-x-3">
+                <img class="w-4 h-4" src="./images/${color}.png" alt="">
+                <span>${object.item}</span>
+                </div>
+                </td>
+                
                 <td class="py-2 px-4">${object.color}</td>
                 <td class="py-2 px-4">${object.size}</td>
                 <td class="py-2 px-4">${object.quantity}</td>
                 <td class="py-2 px-4">${object.price*object.quantity}</td>
                
     `
-    console.log(tr.innerHTML)
     container.appendChild(tr)
+
+    const checkQuantity=document.getElementById("cart-items").childNodes[3].childNodes[7].innerText
+    const checkPrice=document.getElementById("cart-items").childNodes[3].childNodes[9].innerText
+    console.log(checkQuantity,checkPrice)
+    let tr2=document.createElement("tr")
+    tr2.classList.add("text-left");
+    tr2.innerHTML=`
+     
+                <td colspan="3"  class="py-2 px-4">Total</td>
+               
+                <td class="py-2 px-4 ">${object.quantity}</td>
+                <td class="py-2 px-4">${object.price*object.quantity}</td>
+               
+    `
+    
+    
+    container.appendChild(tr2)
 }
 
 
@@ -114,5 +140,9 @@ for(const object of arryOfObject){
 document.getElementById("continue-shopping")
 .addEventListener("click",function(){
     document.getElementById("cart-modal").classList.add("hidden")
-    
+
+    const trChildren=document.getElementById("cart-items").children
+    for(const tr of trChildren){
+        tr.classList.add("hidden")
+    }
 })
